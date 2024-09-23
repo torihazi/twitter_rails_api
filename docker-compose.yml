@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   db:
     image: postgres:14.6
@@ -8,12 +8,12 @@ services:
       - db:/var/lib/postgresql/data
   api:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bundle exec rails s -p 8001 -b '0.0.0.0'
     volumes:
       - .:/myapp
       - bundle:/usr/local/bundle
     ports:
-      - "3000:3000"
+      - "8001:8001"
     depends_on:
       - db
 volumes:
