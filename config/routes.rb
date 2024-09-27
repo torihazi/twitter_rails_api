@@ -3,9 +3,7 @@
 Rails.application.routes.draw do
   resources :tasks
 
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   namespace :api do
     namespace :v1 do
