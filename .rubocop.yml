@@ -8,3 +8,18 @@ AllCops:
   NewCops: enable
 RSpec/MultipleExpectations:
   Max: 2
+Layout/LineLength:
+  Exclude:
+    - "db/migrate/*"
+    - "config/initializers/*"
+Hc/RailsSpecificActionName:
+  Exclude:
+    - "app/controllers/concerns/rack_session_fix.rb"
+Metrics/AbcSize:
+  Exclude:
+    - "db/migrate/*"
+    - "app/controllers/api/v1/users/registrations_controller.rb"
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrate/*"
+    - "app/controllers/api/v1/users/registrations_controller.rb"
