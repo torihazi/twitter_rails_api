@@ -14,7 +14,7 @@ module Api
           build_resource(sign_up_params)
           resource.save
           if resource.persisted?
-              render json: { message: 'Verification email has been send', data: resource }, status: :ok
+            render json: { message: 'Verification email has been send', data: resource }, status: :ok
           else
             Rails.logger.debug { "登録エラー: #{resource.errors.full_messages.join(',')}" }
             render json: { error: 'Registrations error.Please contact Admin' }, status: :unprocessable_entity
