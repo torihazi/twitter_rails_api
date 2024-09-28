@@ -14,15 +14,10 @@ module Api
           build_resource(sign_up_params)
           resource.save
           if resource.persisted?
-            if resource.active_for_authentication?
-              sign_up(resource_name, resource)
-              render json: { message: '認証メールを送信しました', data: resource }, status: :ok
-            else
-              render json: { message: '認証メールを確認してください', data: resource }, status: :ok
-            end
+              render json: { message: 'Verification email has been send', data: resource }, status: :ok
           else
             Rails.logger.debug { "登録エラー: #{resource.errors.full_messages.join(',')}" }
-            render json: { message: '登録エラーです。管理者に連絡してください' }, status: :unprocessable_entity
+            render json: { error: 'Registrations error.Please contact Admin' }, status: :unprocessable_entity
           end
         end
 

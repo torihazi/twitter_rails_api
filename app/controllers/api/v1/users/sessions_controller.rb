@@ -15,9 +15,11 @@ module Api
         # end
 
         # POST /resource/sign_in
-        # def create
-        #   super
-        # end
+        def create
+          self.resource = warden.authenticate!(auth_options)
+          sign_in(resource_name, resource)
+          render json: {message: "Login successful", data: resource}
+        end
 
         # DELETE /resource/sign_out
         # def destroy
