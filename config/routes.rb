@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         registrations: 'api/v1/users/registrations',
         confirmations: 'api/v1/users/confirmations'
       }
+      resources :tweets
     end
   end
 end
