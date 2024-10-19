@@ -15,14 +15,14 @@ module Api
         tweet = current_api_v1_user.tweets.build(tweet_params)
         if tweet.save
           attach_image(tweet) if params[:blob_ids].present?
-          render json: {message: '投稿成功', data: tweet}, status: :created
+          render json: { message: '投稿成功', data: tweet }, status: :created
         else
-          render json: {message: '投稿失敗', error: tweet.errors}, status: :unprocessable_entity
+          render json: { message: '投稿失敗', error: tweet.errors }, status: :unprocessable_entity
         end
       end
 
       private
-  
+
       def tweet_params
         params.require(:tweet).permit(:content)
       end
@@ -33,7 +33,5 @@ module Api
         end
       end
     end
-
-
   end
 end
