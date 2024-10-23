@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         confirmations: 'api/v1/users/confirmations'
       }
       resources :tweets
+      post 'images', to: 'images#create'
     end
   end
 end
