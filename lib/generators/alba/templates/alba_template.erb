@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+<% module_namespaces = class_path.map(&:camelize)%>
+<% if module_namespaces.any? %>
+<%= module_namespaces.map{|namespace| "module #{namespace}"}.join("\n") %>
+  class <%= file_name.camelize %>Resource < BaseResource
+    root_key :<%= model %>
+
+    attributes :id
+  end
+<%= "end\n"*module_namespaces.size%>
+<% else %>
+class <%= file_name.camelize%>Resource < BaseResource
+  root_key :<%= model %>
+
+  attributes :id
+end
+<% end %>
