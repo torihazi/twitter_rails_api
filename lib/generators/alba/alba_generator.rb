@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AlbaGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('templates', __dir__)
 
@@ -5,14 +7,14 @@ class AlbaGenerator < Rails::Generators::NamedBase
 
   def create_alba_base_file
     base_resource_path = File.join('app/resources', 'base_resource.rb')
-    
-    unless File.exist?(base_resource_path)
-      create_file base_resource_path, <<~RUBY
-        class BaseResource
-          include Alba::Resource
-        end
-      RUBY
-    end
+
+    return if File.exist?(base_resource_path)
+
+    create_file base_resource_path, <<~RUBY
+      class BaseResource
+        include Alba::Resource
+      end
+    RUBY
   end
 
   def create_alba_file
@@ -25,6 +27,7 @@ class AlbaGenerator < Rails::Generators::NamedBase
   end
 
   private
+
   def model
     options['model']
   end

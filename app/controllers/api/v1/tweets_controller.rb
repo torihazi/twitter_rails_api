@@ -8,12 +8,12 @@ module Api
 
       def index
         tweets = Tweet
-                  .preload(:user)
-                  .with_attached_images
-                  .order(created_at: "DESC")
-                  .limit(params[:limit])
-                  .offset(params[:offset])
-        render json: {message: '', data: TweetsWithImagesResource.new(tweets), meta: Tweet.count}
+                 .preload(:user)
+                 .with_attached_images
+                 .order(created_at: 'DESC')
+                 .limit(params[:limit])
+                 .offset(params[:offset])
+        render json: { message: '', data: TweetsWithImagesResource.new(tweets), meta: Tweet.count }
       end
 
       def create
