@@ -11,8 +11,8 @@ module Api
                  .preload(:user)
                  .with_attached_images
                  .order(created_at: 'DESC')
-                 .limit(params.fetch(:limit,0))
-                 .offset(params.fetch(:offset,0))
+                 .limit(params.fetch(:limit, 0))
+                 .offset(params.fetch(:offset, 0))
         render json: { message: '', data: TweetsWithImagesResource.new(tweets), meta: Tweet.count }
       end
 
@@ -37,8 +37,6 @@ module Api
           tweet.images.attach(ActiveStorage::Blob.find_signed(blob_id))
         end
       end
-
-
     end
   end
 end
