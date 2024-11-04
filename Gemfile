@@ -41,6 +41,8 @@ gem 'rack-cors'
 gem 'devise'
 gem 'devise-jwt'
 
+gem 'alba'
+
 gem 'dotenv-rails'
 
 group :development, :test do

@@ -7,17 +7,22 @@ module Api
       before_action :authenticate_api_v1_user!
 
       def index
-        tweets = Tweet.all
-        render json: { message: '成功', data: tweets }, status: :ok
+        tweets = Tweet
+                 .preload(:user)
+                 .with_attached_images
+                 .order(created_at: 'DESC')
+                 .limit(params.fetch(:limit, 0))
+                 .offset(params.fetch(:offset, 0))
+        render json: { message: '', data: TweetsWithImagesResource.new(tweets), meta: Tweet.count }
       end
 
       def create
         tweet = current_api_v1_user.tweets.build(tweet_params)
         if tweet.save
           attach_image(tweet) if params[:blob_ids].present?
-          render json: { message: '投稿成功', data: tweet }, status: :created
+          render json: { message: 'Post Success', data: TweetsWithImagesResource.new(tweet) }, status: :created
         else
-          render json: { message: '投稿失敗', error: tweet.errors }, status: :unprocessable_entity
+          render json: { message: 'Post Fail', error: tweet.errors }, status: :unprocessable_entity
         end
       end
 
