@@ -5,6 +5,7 @@ module Api
     class TweetsController < ApplicationController
       include RackSessionFix
       before_action :authenticate_api_v1_user!
+      before_action :set_tweet, only: [:show]
 
       def index
         tweets = Tweet
@@ -14,6 +15,10 @@ module Api
                  .limit(params.fetch(:limit, 0))
                  .offset(params.fetch(:offset, 0))
         render json: { message: '', data: TweetsWithImagesResource.new(tweets), meta: Tweet.count }
+      end
+
+      def show
+        render json: {message: '', data: TweetsWithImagesResource.new(@tweet)}
       end
 
       def create
@@ -36,6 +41,10 @@ module Api
         params[:blob_ids]&.each do |blob_id|
           tweet.images.attach(ActiveStorage::Blob.find_signed(blob_id))
         end
+      end
+
+      def set_tweet
+        @tweet = Tweet.find(params[:id])
       end
     end
   end
