@@ -18,7 +18,7 @@ module Api
       end
 
       def show
-        render json: {message: '', data: TweetsWithImagesResource.new(@tweet)}
+        render json: { message: '', data: TweetsWithImagesResource.new(@tweet) }
       end
 
       def create
